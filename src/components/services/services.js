@@ -4,18 +4,31 @@ import { toast } from "react-toastify";
 const BASE_URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/'
 
 export function handleSignInSubmit(e, url, toSend, setIsLoading) {
+  return new Promise((resolve, reject) => {
 
-  e.preventDefault();
-  setIsLoading(true);
-  axios.post(`${BASE_URL}${url}`, toSend)
-    .then((response) => {
-      console.log(response);
-      setIsLoading(false);
-    })
-    .catch((error) => {
-      console.log(error.response);
-      setIsLoading(false);
-    })
+    e.preventDefault();
+    setIsLoading(true);
+    axios.post(`${BASE_URL}${url}`, toSend)
+      .then((response) => {
+        console.log(response);
+        setIsLoading(false);
+        resolve(response.data.token)
+      })
+      .catch((error) => {
+        console.log(error.response);
+        toast.error(error.response.statusText === 'Unprocessable Entity' ? 'Email inválido' : error.response.data.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setIsLoading(false);
+        reject();
+      })
+  })
 }
 
 export function handleSignUpSubmit(e, url, toSend, setIsLoading) {

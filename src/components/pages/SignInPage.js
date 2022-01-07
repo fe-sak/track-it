@@ -4,24 +4,30 @@ import Loading from "../page components/Loader";
 import Logo from "../page components/Logo";
 import Context from "../contexts/Context";
 import { handleSignInSubmit } from "../services/services";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function SignInPage() {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: '',
     password: ''
   });
 
-  const { isLoading, setIsLoading } = useContext(Context);
+  const { isLoading, setIsLoading, setToken } = useContext(Context);
 
   function handleInputChange(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
 
-
   return (
     <Container>
       <Logo />
-      <Form onSubmit={(e) => handleSignInSubmit(e, 'auth/login', formValues, setIsLoading)}>
+      <Form onSubmit={(e) => handleSignInSubmit(e, 'auth/login', formValues, setIsLoading)
+        .then((response) => {
+          setToken(response);
+          navigate('/hoje');
+        })}>
         <Input
           type="email"
           placeholder="email"
@@ -37,6 +43,7 @@ export default function SignInPage() {
         <Button isLoading={isLoading} type="submit">{isLoading ? <Loading /> : 'Entrar'}</Button>
       </Form>
       <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
+      <ToastContainer />
     </Container>
   )
 }
