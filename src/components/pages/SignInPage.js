@@ -26,6 +26,8 @@ export default function SignInPage() {
       <Form onSubmit={(e) => handleSignInSubmit(e, 'auth/login', formValues, setIsLoading)
         .then((response) => {
           setUser(response);
+          console.log("A");
+          console.log(response);
           navigate('/hoje');
         })}>
         <Input

@@ -4,6 +4,7 @@ import SignInPage from './pages/SignInPage'
 import SignUpPage from './pages/SignUpPage'
 import Context from './contexts/Context';
 import TodayPage from './pages/TodayPage';
+import Header from './page components/Header';
 
 export default function App() {
   const [user, setUser] = useState('');
@@ -12,6 +13,7 @@ export default function App() {
   return (
     <Context.Provider value={{ user, setUser, isLoading, setIsLoading }}>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path='/' element={<SignInPage />} />
           <Route path='/cadastro' element={<SignUpPage />} />
