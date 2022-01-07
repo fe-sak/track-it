@@ -10,12 +10,10 @@ export function handleSignInSubmit(e, url, toSend, setIsLoading) {
     setIsLoading(true);
     axios.post(`${BASE_URL}${url}`, toSend)
       .then((response) => {
-        console.log(response);
         setIsLoading(false);
-        resolve(response.data.token)
+        resolve(response.data)
       })
       .catch((error) => {
-        console.log(error.response);
         toast.error(error.response.statusText === 'Unprocessable Entity' ? 'Email inválido' : error.response.data.message, {
           position: "top-center",
           autoClose: 5000,

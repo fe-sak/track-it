@@ -6,11 +6,11 @@ import Context from './contexts/Context';
 import TodayPage from './pages/TodayPage';
 
 export default function App() {
-  const [token, setToken] = useState('');
+  const [user, setUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log(user);
   return (
-    <Context.Provider value={{ token, setToken, isLoading, setIsLoading }}>
+    <Context.Provider value={{ user, setUser, isLoading, setIsLoading }}>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<SignInPage />} />

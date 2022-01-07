@@ -9,54 +9,19 @@ import Context from "../contexts/Context";
 import { handleSignUpSubmit } from "../services/services";
 
 export default function SignUpPage() {
+  const { isLoading, setIsLoading } = useContext(Context);
   const navigate = useNavigate();
+
   const [formValues, setFormValues] = useState({
     email: '',
     name: '',
     image: '',
     password: ''
   });
-  const { isLoading, setIsLoading } = useContext(Context);
 
   function handleInputChange(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
   }
-
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   setIsLoading(true);
-  //   axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', formValues)
-  //     .then((response) => {
-  //       console.log(response);
-  //       setIsLoading(false);
-  //       toast.success(`Usuário criado com sucesso!
-  //       Você será redirecionado para a página de login`, {
-  //         position: "top-center",
-  //         autoClose: 5000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //       });
-  //       setTimeout(() => navigate('/'), 6000);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error.response);
-  //       setIsLoading(false);
-  //       toast.error(error.response.data.message === 'Campo "body" inválido!' ? 'Email inválido' : error.response.data.message, {
-  //         position: "top-center",
-  //         autoClose: 5000,
-  //         hideProgressBar: false,
-  //         closeOnClick: true,
-  //         pauseOnHover: true,
-  //         draggable: true,
-  //         progress: undefined,
-  //       });
-  //     })
-  // }
-
-  console.log(isLoading);
 
   return (
     <Container>

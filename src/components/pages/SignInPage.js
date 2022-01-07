@@ -14,7 +14,7 @@ export default function SignInPage() {
     password: ''
   });
 
-  const { isLoading, setIsLoading, setToken } = useContext(Context);
+  const { isLoading, setIsLoading, setUser } = useContext(Context);
 
   function handleInputChange(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -25,7 +25,7 @@ export default function SignInPage() {
       <Logo />
       <Form onSubmit={(e) => handleSignInSubmit(e, 'auth/login', formValues, setIsLoading)
         .then((response) => {
-          setToken(response);
+          setUser(response);
           navigate('/hoje');
         })}>
         <Input
