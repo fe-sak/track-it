@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import SignInPage from './SignInPage'
-import SignUpPage from './SignUpPage'
+import SignInPage from './pages/SignInPage'
+import SignUpPage from './pages/SignUpPage'
+import Context from './contexts/Context';
 
 export default function App() {
+  const [token, setToken] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<SignInPage isLoading={isLoading} setIsLoading={setIsLoading} />} />
-        <Route path='/cadastro' element={<SignUpPage isLoading={isLoading} setIsLoading={setIsLoading} />} />
-        <Route path='/habitos' />
-        <Route path='/hoje' />
-        <Route path='/historico' />
-      </Routes>
-    </BrowserRouter>
+    <Context.Provider value={{ token, setToken, isLoading, setIsLoading }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<SignInPage />} />
+          <Route path='/cadastro' element={<SignUpPage />} />
+          <Route path='/habitos' />
+          <Route path='/hoje' />
+          <Route path='/historico' />
+        </Routes>
+      </BrowserRouter>
+    </Context.Provider>
   )
 }
 

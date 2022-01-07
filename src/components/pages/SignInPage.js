@@ -1,14 +1,17 @@
+import { useContext, useState } from "react"
+import { Container, Form, Input, Button, StyledLink } from '../page components/styledComponents';
 import axios from "axios";
-import { useState } from "react"
-import Loading from "../Loader";
-import Logo from "../Logo";
-import { Container, Form, Input, Button, StyledLink } from '../styledComponents';
+import Loading from "../page components/Loader";
+import Logo from "../page components/Logo";
+import Context from "../contexts/Context";
 
-export default function SignInPage({ isLoading, setIsLoading }) {
+export default function SignInPage() {
   const [formValues, setFormValues] = useState({
     email: '',
     password: ''
   });
+
+  const { isLoading, setIsLoading } = useContext(Context);
 
   function handleInputChange(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })

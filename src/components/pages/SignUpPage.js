@@ -1,13 +1,14 @@
-import axios from "axios";
-import { useState } from "react"
-import Loading from "../Loader";
-import Logo from "../Logo";
-import { Container, Form, Input, Button, StyledLink } from '../styledComponents';
+import { useContext, useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from "react-router-dom";
+import { Container, Form, Input, Button, StyledLink } from '../page components/styledComponents';
+import axios from "axios";
+import Loading from "../page components/Loader";
+import Logo from "../page components/Logo";
+import Context from "../contexts/Context";
 
-export default function SignUpPage({ isLoading, setIsLoading }) {
+export default function SignUpPage() {
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: '',
@@ -15,6 +16,7 @@ export default function SignUpPage({ isLoading, setIsLoading }) {
     image: '',
     password: ''
   });
+  const { isLoading, setIsLoading } = useContext(Context);
 
   function handleInputChange(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
