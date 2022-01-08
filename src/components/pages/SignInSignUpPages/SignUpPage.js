@@ -2,11 +2,11 @@ import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify"
 import 'react-toastify/dist/ReactToastify.css';
-import { Container, Form, Input, Button, StyledLink } from '../page components/styledComponents';
-import Loading from "../page components/Loader";
-import Logo from "../page components/Logo";
-import Context from "../contexts/Context";
-import { handleSignUpSubmit } from "../services/services";
+import { Container, Form, Input, Button, StyledLink } from './style';
+import Loading from "../../page components/Loader";
+import Logo from "../../page components/Logo";
+import Context from "../../contexts/Context";
+import { handleSignUpSubmit } from "../../services/services";
 
 export default function SignUpPage() {
   const { isLoading, setIsLoading } = useContext(Context);

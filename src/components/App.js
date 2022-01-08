@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import SignInPage from './pages/SignInPage'
-import SignUpPage from './pages/SignUpPage'
 import Context from './contexts/Context';
-import TodayPage from './pages/TodayPage';
+import Footer from './page components/Footer';
 import Header from './page components/Header';
+import HabitsPage from './pages/HabitsPage';
+import SignInPage from './pages/SignInSignUpPages/SignInPage';
+import SignUpPage from './pages/SignInSignUpPages/SignUpPage';
+import TodayPage from './pages/TodayPage/index';
 
 export default function App() {
   const [user, setUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  console.log(user);
   return (
     <Context.Provider value={{ user, setUser, isLoading, setIsLoading }}>
       <BrowserRouter>
@@ -17,10 +18,11 @@ export default function App() {
         <Routes>
           <Route path='/' element={<SignInPage />} />
           <Route path='/cadastro' element={<SignUpPage />} />
-          <Route path='/habitos' />
+          <Route path='/habitos' element={<HabitsPage />} />
           <Route path='/hoje' element={<TodayPage />} />
           <Route path='/historico' />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </Context.Provider>
   )

@@ -6,7 +6,6 @@ import textLogo from "../../assets/TrackIt.svg"
 
 export default function Header() {
   const { user } = useContext(Context);
-  console.log(user);
   const location = useLocation();
   return (
     <>
@@ -29,6 +28,7 @@ const PageHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 
   img:first-of-type {
     width: 97px;

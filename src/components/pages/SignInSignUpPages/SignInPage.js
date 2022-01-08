@@ -1,9 +1,9 @@
 import { useContext, useState } from "react"
-import { Container, Form, Input, Button, StyledLink } from '../page components/styledComponents';
-import Loading from "../page components/Loader";
-import Logo from "../page components/Logo";
-import Context from "../contexts/Context";
-import { handleSignInSubmit } from "../services/services";
+import { Container, Form, Input, Button, StyledLink } from './style'
+import Loading from "../../page components/Loader";
+import Logo from "../../page components/Logo";
+import Context from "../../contexts/Context";
+import { handleSignInSubmit } from "../../services/services";
 import { ToastContainer } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -26,8 +26,6 @@ export default function SignInPage() {
       <Form onSubmit={(e) => handleSignInSubmit(e, 'auth/login', formValues, setIsLoading)
         .then((response) => {
           setUser(response);
-          console.log("A");
-          console.log(response);
           navigate('/hoje');
         })}>
         <Input
