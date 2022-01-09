@@ -3,3 +3,7 @@ body {
   height: 100vh;
   font-family: 'Lexend Deca', sans-serif;
 }
+
+* {
+  box-sizing: border-box;
+}

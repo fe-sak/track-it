@@ -29,6 +29,7 @@ const PageHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  z-index: 99;
 
   img:first-of-type {
     width: 97px;
