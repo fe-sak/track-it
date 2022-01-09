@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { useState } from "react/cjs/react.development";
 import Context from '../../contexts/Context'
@@ -20,7 +20,7 @@ export default function HabitsPage() {
 
   const noHabitsSpanString = 'Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!';
 
-  useEffect(() => {
+  const getHabits = useCallback(() => {
     axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', {
       headers: {
         Authorization: `Bearer ${user.token}`
@@ -30,6 +30,10 @@ export default function HabitsPage() {
         setHabits(response.data);
       })
   }, [user.token])
+
+  useEffect(() => {
+    getHabits()
+  }, [getHabits])
 
 
   return (
@@ -79,15 +83,7 @@ export default function HabitsPage() {
                     setInput('');
                     setWeekdays(deepCopyWeekdaysDefault);
                     setShowForm(false);
-                    axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', {
-                      headers: {
-                        Authorization: `Bearer ${user.token}`
-                      }
-                    })
-                      .then((response) => {
-                        setHabits(response.data);
-                      })
-
+                    getHabits()
                   }, 500);
                 })
                 .catch((error) => {
@@ -128,7 +124,9 @@ export default function HabitsPage() {
           </CheckboxContainer>
 
           <ButtonContainer>
-            <CancelButton>Cancelar</CancelButton>
+            <CancelButton
+              onClick={() => setShowForm(false)}
+            >Cancelar</CancelButton>
             <SubmitButton
               type='submit'
               isLoading={isLoading}>{isLoading ? <Loading /> : 'Salvar'}</SubmitButton>
@@ -145,8 +143,24 @@ export default function HabitsPage() {
                   <Checkbox
                     key={weekday.index}
                     isSelected={habit.days.includes(weekday.index)}>
+
                     <span>{weekday.day}</span>
-                    <ion-icon name="trash-outline"></ion-icon>
+
+                    <ion-icon
+                      name="trash-outline"
+                      onClick={() => {
+                        if (window.confirm("Deseja deletar este hábito?")) {
+
+                          axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}`,
+                            {
+                              headers: {
+                                'Authorization': `Bearer ${user.token}`
+                              }
+                            })
+                            .then(() => getHabits())
+                        }
+                      }}></ion-icon>
+
                   </Checkbox>
                 )}
               </CheckboxContainer>
