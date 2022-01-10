@@ -11,7 +11,7 @@ import { axiosDelete, axiosPost, useAxiosGet } from "../../services/services";
 export default function HabitsPage() {
   const deepCopyWeekdaysDefault = JSON.parse(JSON.stringify(weekdaysDefault));
 
-  const { user, isLoading, setIsLoading } = useContext(Context);
+  const { user, setUser, isLoading, setIsLoading } = useContext(Context);
   const [input, setInput] = useState('');
   const [habits, setHabits] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -21,6 +21,11 @@ export default function HabitsPage() {
 
   const noHabitsSpanString = 'Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!';
 
+  useEffect(() => {
+    if (localStorage.getItem('user') !== null) {
+      setUser(JSON.parse(localStorage.getItem('user')))
+    }
+  }, [setUser])
 
   const requestConfig = {
     headers: {
@@ -29,6 +34,7 @@ export default function HabitsPage() {
   }
 
   useEffect(() => {
+    console.log("hey hey hey")
     getHabits('habits', user.token, setHabits);
   }, [user.token, getHabits])
 

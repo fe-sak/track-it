@@ -6,12 +6,18 @@ import countProgress from "./countProgress";
 import { axiosPost, useAxiosGet } from "../../services/services";
 
 export default function TodayPage() {
-  const { user } = useContext(Context);
+  const { user, setUser } = useContext(Context);
   const [todaysHabits, setTodaysHabits] = useState([]);
   const getTodaysHabits = useAxiosGet();
 
   const weekdays = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
   const currentDate = new Date();
+
+  useEffect(() => {
+    if (localStorage.getItem('user') !== null) {
+      setUser(JSON.parse(localStorage.getItem('user')))
+    }
+  }, [setUser])
 
   const requestConfig = {
     headers: {

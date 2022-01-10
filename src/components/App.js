@@ -12,6 +12,9 @@ import TodayPage from './pages/TodayPage/index';
 export default function App() {
   const [user, setUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  console.log(user);
+
+  console.log(localStorage.getItem('user'));
   return (
     <Context.Provider value={{ user, setUser, isLoading, setIsLoading }}>
       <BrowserRouter>

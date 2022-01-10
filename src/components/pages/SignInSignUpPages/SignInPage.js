@@ -13,8 +13,12 @@ export default function SignInPage() {
     email: '',
     password: ''
   });
-
   const { isLoading, setIsLoading, setUser } = useContext(Context);
+
+  if (localStorage.getItem('user') !== null) {
+    setUser(JSON.parse(localStorage.getItem('user')))
+    navigate('/hoje');
+  }
 
   function handleInputChange(e) {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -26,6 +30,7 @@ export default function SignInPage() {
       <Form onSubmit={(e) => handleSignInSubmit(e, 'auth/login', formValues, setIsLoading)
         .then((response) => {
           setUser(response);
+          localStorage.setItem('user', JSON.stringify(response));
           navigate('/hoje');
         })}>
         <Input
