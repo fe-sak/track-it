@@ -4,6 +4,7 @@ import Context from './contexts/Context';
 import Footer from './page components/Footer';
 import Header from './page components/Header';
 import HabitsPage from './pages/HabitsPage';
+import HistoryPage from './pages/HistoryPage';
 import SignInPage from './pages/SignInSignUpPages/SignInPage';
 import SignUpPage from './pages/SignInSignUpPages/SignUpPage';
 import TodayPage from './pages/TodayPage/index';
@@ -20,7 +21,7 @@ export default function App() {
           <Route path='/cadastro' element={<SignUpPage />} />
           <Route path='/habitos' element={<HabitsPage />} />
           <Route path='/hoje' element={<TodayPage />} />
-          <Route path='/historico' />
+          <Route path='/historico' element={<HistoryPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
