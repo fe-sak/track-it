@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import Calendar from "react-calendar";
 import Context from "../../contexts/Context";
 import { Container, StyledSpan, TitleSpan } from "./style";
 
 export default function HistoryPage() {
-
   const { setUser } = useContext(Context);
+  const [calendar, setCalendar] = useState(new Date())
 
   useEffect(() => {
     if (localStorage.getItem('user') !== null) {
@@ -15,6 +16,7 @@ export default function HistoryPage() {
     <Container>
       <TitleSpan>Histórico</TitleSpan>
       <StyledSpan>Em breve você poderá ver o histórico dos seus hábitos aqui!</StyledSpan>
+      <Calendar />
     </Container>
   )
 }

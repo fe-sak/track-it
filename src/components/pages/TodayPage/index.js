@@ -1,7 +1,6 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Container, TitleSpan, Habit, HabitsContainer, ProgressSpan } from "./style";
 import Context from "../../contexts/Context"
-import { useState } from "react/cjs/react.development";
 import countProgress from "./countProgress";
 import { axiosPost, useAxiosGet } from "../../services/services";
 

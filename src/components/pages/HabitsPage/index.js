@@ -1,6 +1,5 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
-import { useState } from "react/cjs/react.development";
 import Context from '../../contexts/Context'
 import Loading from "../../page components/Loader";
 import { Button, ButtonContainer, CancelButton, Checkbox, CheckboxContainer, Container, Habit, Habits, NoHabitsSpan, StyledForm, SubmitButton, TitleContainer, TitleSpan } from "./style";
