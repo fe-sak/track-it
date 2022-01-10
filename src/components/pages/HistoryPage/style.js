@@ -9,6 +9,13 @@ const Container = styled.div`
   span{
     display: block;
   }
+
+  &>div:last-child{
+    width: 100%;
+    margin-top: 11px;
+    border-radius: 10px;
+    border: none;
+  }
 `
 
 const TitleSpan = styled.span`
