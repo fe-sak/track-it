@@ -4,10 +4,10 @@
   "private": true,
   "dependencies": {
     "axios": "^0.24.0",
-    "react": "^17.0.2",
+    "react": "^18.0.0-rc.0-next-fe905f152-20220107",
     "react-calendar": "^3.5.0",
     "react-circular-progressbar": "^2.0.4",
-    "react-dom": "^17.0.2",
+    "react-dom": "^18.0.0-rc.0-next-fe905f152-20220107",
     "react-loader-spinner": "^4.0.0",
     "react-router-dom": "^6.2.1",
     "react-scripts": "^4.0.3",
