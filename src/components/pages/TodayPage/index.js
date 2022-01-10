@@ -26,8 +26,10 @@ export default function TodayPage() {
   }
 
   useEffect(() => {
-    getTodaysHabits('habits/today', user.token, setTodaysHabits);
-  }, [getTodaysHabits, user.token])
+    if (user !== '') {
+      getTodaysHabits('habits/today', user.token, setTodaysHabits);
+    }
+  }, [getTodaysHabits, user, user.token])
 
   if (todaysHabits === undefined) return '';
   else {

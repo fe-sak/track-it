@@ -34,9 +34,10 @@ export default function HabitsPage() {
   }
 
   useEffect(() => {
-    console.log("hey hey hey")
-    getHabits('habits', user.token, setHabits);
-  }, [user.token, getHabits])
+    if (user !== '') {
+      getHabits('habits', user.token, setHabits);
+    }
+  }, [user, user.token, getHabits])
 
   return (
     <Container>
