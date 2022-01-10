@@ -150,7 +150,6 @@ export default function HabitsPage() {
                       name="trash-outline"
                       onClick={() => {
                         if (window.confirm("Deseja deletar este hábito?")) {
-
                           axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}`,
                             {
                               headers: {
