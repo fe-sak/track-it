@@ -1,11 +1,24 @@
+import { useContext, useEffect } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import 'react-circular-progressbar/dist/styles.css';
 import { Link, useLocation } from "react-router-dom"
 import styled from "styled-components";
+import Context from "../contexts/Context";
+import countProgress from "../pages/TodayPage/countProgress";
+import { useAxiosGet } from "../services/services";
 
 export default function Footer() {
   const location = useLocation();
+  const { user, todaysHabits, setTodaysHabits } = useContext(Context);
+  const getTodaysHabits = useAxiosGet();
 
+  useEffect(() => {
+    if (user !== '') {
+      getTodaysHabits('habits/today', user.token, setTodaysHabits);
+    }
+  }, [getTodaysHabits, user, user.token, setTodaysHabits])
+
+  const [done, total] = countProgress(todaysHabits)
   return (
     <>
       {location.pathname === '/' || location.pathname === '/cadastro' ? '' :
@@ -13,7 +26,7 @@ export default function Footer() {
           <StyledLink to='/habitos'>Hábitos</StyledLink>
           <ProgressbarLink to='/hoje'>
             <CircularProgressbar
-              value={50}
+              value={Math.round(((done / total) * 100))}
               text='Hoje'
               background='true'
               backgroundPadding={6}

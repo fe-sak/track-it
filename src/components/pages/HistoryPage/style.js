@@ -23,10 +23,36 @@ const TitleSpan = styled.span`
   color: #126BA5;
 `
 
-const StyledSpan = styled.span`
-  font-size: 18px;
-  color: #666666;
-  margin-top: 10px;
+const CalendarContainer = styled.div`
+  .react-calendar{
+    width: 100%;
+  }
+  
+
+  .complete {
+    position: relative;
+    background-color: transparent;
+    z-index: 10;
+
+    abbr{
+      padding: 7px;
+      border-radius: 100%;
+      background-color: #8CC654;
+      color: black;
+    }
+  }
+    .incomplete {
+    position: relative;
+    background-color: transparent;
+    z-index: 10;
+
+    abbr{
+      padding: 7px;
+      border-radius: 100%;
+      background-color: #EA5766;
+      color: black;
+    }
+  }
 `
 
-export { Container, TitleSpan, StyledSpan }
+export { Container, TitleSpan, CalendarContainer }

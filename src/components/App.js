@@ -12,9 +12,10 @@ import TodayPage from './pages/TodayPage/index';
 export default function App() {
   const [user, setUser] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [todaysHabits, setTodaysHabits] = useState([]);
 
   return (
-    <Context.Provider value={{ user, setUser, isLoading, setIsLoading }}>
+    <Context.Provider value={{ user, setUser, isLoading, setIsLoading, todaysHabits, setTodaysHabits }}>
       <BrowserRouter>
         <Header />
         <Routes>

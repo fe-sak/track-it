@@ -5,8 +5,8 @@ import 'react-calendar/dist/Calendar.css';
 
 import Context from "../../contexts/Context";
 import { useAxiosGet } from "../../services/services";
-import { Container, StyledSpan, TitleSpan } from "./style";
-import styled from "styled-components";
+import { Checkbox, CheckboxContainer } from "../HabitsPage/style";
+import { Container, TitleSpan, CalendarContainer } from "./style";
 
 export default function HistoryPage() {
   const { user, setUser } = useContext(Context);
@@ -27,22 +27,21 @@ export default function HistoryPage() {
       axiosGet(`habits/history/daily`, user.token, setHistory);
     }
   }, [axiosGet, user, setHistory])
-  console.log(history);
 
   const [userDatesComplete, userDatesIncomplete] = history.map((object) => object.habits.map((habit) => habit.done ? object.day : object.day))
 
-  console.log(userDatesComplete);
-
   function tileClassName({ date }) {
-    if (userDatesComplete.includes(dayjs(date).format('DD/MM/YYYY'))) {
-      return 'highlightGreen';
+    date = dayjs(date).format('DD/MM/YYYY');
+    if (userDatesComplete.includes(date)) {
+      return 'complete';
     }
-    else if (userDatesIncomplete.includes(dayjs(date).format('DD/MM/YYYY'))) return 'highlightRed';
+    else if (userDatesIncomplete.includes(date)) return 'incomplete';
     else return ''
   }
 
-
-
+  let showHabits = [];
+  console.log(history);
+  console.log(showHabits);
   if (history.length === 0) return '';
   else {
     return (
@@ -50,47 +49,29 @@ export default function HistoryPage() {
         <TitleSpan>Histórico</TitleSpan>
         <CalendarContainer>
           <Calendar
-            value={calendar}
-            onChange={setCalendar}
             calendarType="US"
             locale="pt-br"
-            tileClassName={tileClassName}
             formatDay={(locale, date) => dayjs(date).format("DD")}
+            value={calendar}
+            onChange={setCalendar}
+            tileClassName={tileClassName}
+            onClickDay={(date) => {
+              date = dayjs(date).format('DD/MM/YYYY');
+              if (userDatesComplete.includes(date) || userDatesIncomplete.includes(date)) {
+                console.log(date);
+                console.log(history[0].day)
+                showHabits = history.filter(object => object.day === date)
+              }
+            }}
           />
+          <CheckboxContainer>
+            <Checkbox>
+              {showHabits}
+            </Checkbox>
+          </CheckboxContainer>
         </CalendarContainer>
       </Container>
     )
   }
 }
 
-const CalendarContainer = styled.div`
-  .react-calendar{
-    width: 100%;
-  }
-  
-
-  .highlightGreen {
-    position: relative;
-    background-color: transparent;
-    z-index: 10;
-
-    abbr{
-      padding: 7px;
-      border-radius: 100%;
-      background-color: #8CC654;
-      color: black;
-    }
-  }
-    .highlightRed {
-    position: relative;
-    background-color: transparent;
-    z-index: 10;
-
-    abbr{
-      padding: 7px;
-      border-radius: 100%;
-      background-color: #EA5766;
-      color: black;
-    }
-  }
-`

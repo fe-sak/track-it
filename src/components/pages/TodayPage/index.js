@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Container, TitleSpan, Habit, HabitsContainer, ProgressSpan } from "./style";
 import Context from "../../contexts/Context"
 import countProgress from "./countProgress";
 import { axiosPost, useAxiosGet } from "../../services/services";
 
 export default function TodayPage() {
-  const { user, setUser } = useContext(Context);
-  const [todaysHabits, setTodaysHabits] = useState([]);
+  const { user, setUser, todaysHabits, setTodaysHabits } = useContext(Context);
   const getTodaysHabits = useAxiosGet();
 
   const weekdays = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
@@ -28,7 +27,7 @@ export default function TodayPage() {
     if (user !== '') {
       getTodaysHabits('habits/today', user.token, setTodaysHabits);
     }
-  }, [getTodaysHabits, user, user.token])
+  }, [getTodaysHabits, user, user.token, setTodaysHabits])
 
   if (todaysHabits === undefined) return '';
   else {
