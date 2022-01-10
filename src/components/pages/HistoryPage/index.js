@@ -40,8 +40,6 @@ export default function HistoryPage() {
   }
 
   let showHabits = [];
-  console.log(history);
-  console.log(showHabits);
   if (history.length === 0) return '';
   else {
     return (
@@ -55,14 +53,12 @@ export default function HistoryPage() {
             value={calendar}
             onChange={setCalendar}
             tileClassName={tileClassName}
-            onClickDay={(date) => {
-              date = dayjs(date).format('DD/MM/YYYY');
-              if (userDatesComplete.includes(date) || userDatesIncomplete.includes(date)) {
-                console.log(date);
-                console.log(history[0].day)
-                showHabits = history.filter(object => object.day === date)
-              }
-            }}
+          // onClickDay={(date) => {
+          //   date = dayjs(date).format('DD/MM/YYYY');
+          //   if (userDatesComplete.includes(date) || userDatesIncomplete.includes(date)) {
+          //     showHabits = history.filter(object => object.day === date)
+          //   }
+          // }}
           />
           <CheckboxContainer>
             <Checkbox>
