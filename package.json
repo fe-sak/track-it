@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.24.0",
+    "dayjs": "^1.10.7",
     "react": "^18.0.0-rc.0-next-fe905f152-20220107",
     "react-calendar": "^3.5.0",
     "react-circular-progressbar": "^2.0.4",

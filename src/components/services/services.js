@@ -43,14 +43,14 @@ export function handleSignUpSubmit(e, url, toSend, setIsLoading) {
 }
 
 export function useAxiosGet() {
-  const axiosGet = useCallback((url, token, setHabits) => {
+  const axiosGet = useCallback((url, token, setState) => {
     axios.get(`${BASE_URL}${url}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
       .then((response) => {
-        setHabits(response.data);
+        setState(response.data);
       })
   }, [])
 
