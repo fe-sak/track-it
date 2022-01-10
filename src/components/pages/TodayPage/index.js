@@ -1,30 +1,27 @@
-import axios from "axios";
-import { useCallback, useContext, useEffect } from "react";
-import { Container, DaySpan, Habit, HabitsContainer, ProgressSpan } from "./style";
+import { useContext, useEffect } from "react";
+import { Container, TitleSpan, Habit, HabitsContainer, ProgressSpan } from "./style";
 import Context from "../../contexts/Context"
 import { useState } from "react/cjs/react.development";
 import countProgress from "./countProgress";
+import { axiosPost, useAxiosGet } from "../../services/services";
 
 export default function TodayPage() {
   const { user } = useContext(Context);
   const [todaysHabits, setTodaysHabits] = useState([]);
-
-  const getHabits = useCallback(() => {
-    axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today', {
-      headers: {
-        Authorization: `Bearer ${user.token}`
-      }
-    })
-      .then((response) => setTodaysHabits(response.data))
-  }, [user.token]);
-
+  const getTodaysHabits = useAxiosGet();
 
   const weekdays = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
   const currentDate = new Date();
 
+  const requestConfig = {
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  }
+
   useEffect(() => {
-    getHabits()
-  }, [getHabits])
+    getTodaysHabits('habits/today', user.token, setTodaysHabits);
+  }, [getTodaysHabits, user.token])
 
   if (todaysHabits === undefined) return '';
   else {
@@ -32,11 +29,11 @@ export default function TodayPage() {
 
     return (
       <Container>
-        <DaySpan>
+        <TitleSpan>
           {`${weekdays[currentDate.getDay()]}, 
           ${currentDate.getDate().toLocaleString('pt-br', { minimumIntegerDigits: 2 })}/
           ${(currentDate.getMonth() + 1).toLocaleString('pt-br', { minimumIntegerDigits: 2, })}`}
-        </DaySpan>
+        </TitleSpan>
 
         <ProgressSpan isDone={done !== 0}>
           {done === 0 ? 'Nenhum hábito concluído ainda' : `${Math.round(((done / total) * 100))}% dos hábitos concluídos`}
@@ -56,22 +53,12 @@ export default function TodayPage() {
               </div>
               <div onClick={() => {
                 if (habit.done) {
-                  axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/uncheck`, {},
-                    {
-                      headers: {
-                        'Authorization': `Bearer ${user.token}`
-                      }
-                    })
-                    .then(() => getHabits())
+                  axiosPost(`habits/${habit.id}/uncheck`, {}, requestConfig)
+                    .then(() => getTodaysHabits('habits/today', user.token, setTodaysHabits))
                 }
                 else {
-                  axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}/check`, {},
-                    {
-                      headers: {
-                        'Authorization': `Bearer ${user.token}`
-                      }
-                    })
-                    .then(() => getHabits())
+                  axiosPost(`habits/${habit.id}/check`, {}, requestConfig)
+                    .then(() => getTodaysHabits('habits/today', user.token, setTodaysHabits))
                 }
               }}>
                 <ion-icon name="checkmark-sharp"></ion-icon>

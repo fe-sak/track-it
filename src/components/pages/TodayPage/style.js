@@ -13,7 +13,7 @@ const Container = styled.div`
   }
 `
 
-const DaySpan = styled.span`
+const TitleSpan = styled.span`
   font-size: 23px;
   color: #126BA5;
 `
@@ -79,4 +79,4 @@ const Habit = styled.div`
   }
 `
 
-export { Container, DaySpan, ProgressSpan, HabitsContainer, Habit }
+export { Container, TitleSpan, ProgressSpan, HabitsContainer, Habit }

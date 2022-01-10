@@ -7,6 +7,7 @@ import textLogo from "../../assets/TrackIt.svg"
 export default function Header() {
   const { user } = useContext(Context);
   const location = useLocation();
+
   return (
     <>
       {location.pathname === '/' || location.pathname === '/cadastro' ? '' :

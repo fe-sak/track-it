@@ -36,25 +36,29 @@ export default function SignUpPage() {
           placeholder="email"
           name='email'
           value={formValues.email}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+          required />
         <Input
           type="password"
           placeholder="senha"
           name='password'
           value={formValues.password}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+          required />
         <Input
           type="text"
           placeholder="nome"
           name='name'
           value={formValues.name}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+          required />
         <Input
           type="url"
           placeholder="foto"
           name='image'
           value={formValues.image}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+          required />
 
         <Button isLoading={isLoading} type="submit">
           {isLoading ? <Loading /> : 'Cadastrar'}

@@ -5,6 +5,7 @@ const Container = styled.div`
   height: 100%;
   padding: 98px 17px 100px 17px;
   background-color: #F2F2F2;
+  overflow: scroll;
 `
 const TitleSpan = styled.span`
   font-size: 23px;

@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 export default function Footer() {
   const location = useLocation();
+
   return (
     <>
       {location.pathname === '/' || location.pathname === '/cadastro' ? '' :

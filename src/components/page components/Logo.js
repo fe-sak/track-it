@@ -7,4 +7,4 @@ export default function Logo() {
 
 const Img = styled.img`
   margin: 68px 0px 33px 0px;
-  `
+`

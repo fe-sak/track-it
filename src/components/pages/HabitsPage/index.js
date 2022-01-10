@@ -1,51 +1,49 @@
-import axios from "axios";
-import { useCallback, useContext, useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { useContext, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
 import { useState } from "react/cjs/react.development";
 import Context from '../../contexts/Context'
 import Loading from "../../page components/Loader";
 import { Button, ButtonContainer, CancelButton, Checkbox, CheckboxContainer, Container, Habit, Habits, NoHabitsSpan, StyledForm, SubmitButton, TitleContainer, TitleSpan } from "./style";
+import { toastError } from "../../page components/toasts";
 import { weekdaysDefault } from "./weekdays";
+import { axiosDelete, axiosPost, useAxiosGet } from "../../services/services";
 
 export default function HabitsPage() {
-  const { user, isLoading, setIsLoading } = useContext(Context);
   const deepCopyWeekdaysDefault = JSON.parse(JSON.stringify(weekdaysDefault));
 
+  const { user, isLoading, setIsLoading } = useContext(Context);
   const [input, setInput] = useState('');
   const [habits, setHabits] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [weekdays, setWeekdays] = useState(deepCopyWeekdaysDefault)
 
-  console.log(habits);
+  const getHabits = useAxiosGet();
 
   const noHabitsSpanString = 'Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!';
 
-  const getHabits = useCallback(() => {
-    axios.get('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits', {
-      headers: {
-        Authorization: `Bearer ${user.token}`
-      }
-    })
-      .then((response) => {
-        setHabits(response.data);
-      })
-  }, [user.token])
+
+  const requestConfig = {
+    headers: {
+      'Authorization': `Bearer ${user.token}`
+    }
+  }
 
   useEffect(() => {
-    getHabits()
-  }, [getHabits])
-
+    getHabits('habits', user.token, setHabits);
+  }, [user.token, getHabits])
 
   return (
     <Container>
       <TitleContainer>
         <TitleSpan>Meus hábitos</TitleSpan>
+
         <Button onClick={() => {
           if (showForm === false) setShowForm(true);
           else setShowForm(false);
         }}>
           <ion-icon name="add-outline"></ion-icon>
         </Button>
+
       </TitleContainer>
       {showForm &&
         <StyledForm
@@ -53,49 +51,30 @@ export default function HabitsPage() {
             e.preventDefault();
 
             const days = weekdays.filter((weekday) => weekday.isSelected === true).map((filteredWeekday) => filteredWeekday.index);
-            if (days.length === 0) {
-              toast.error('Escolha pelo menos um dia da semana!', {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
+            const requestBody = {
+              name: input,
+              days
             }
 
+            if (days.length === 0) {
+              toastError('Escolha pelo menos um dia da semana!');
+            }
             else {
               setIsLoading(true);
-              axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits',
-                {
-                  name: input,
-                  days
-                },
-                {
-                  headers: {
-                    'Authorization': `Bearer ${user.token}`
-                  }
-                })
+              axiosPost('habits', requestBody, requestConfig)
                 .then(() => {
                   setTimeout(() => {
                     setIsLoading(false);
                     setInput('');
                     setWeekdays(deepCopyWeekdaysDefault);
                     setShowForm(false);
-                    getHabits()
+                    getHabits('habits', user.token, setHabits);
                   }, 500);
                 })
                 .catch((error) => {
-                  toast.error(error.response.data.message === 'Campo "body" inválido!' ? 'Nome do hábito não pode ser vazio!' : error.response.data.message, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                  });
+                  toastError(error.response.data.message === 'Campo "body" inválido!' ?
+                    'Nome do hábito não pode ser vazio!' :
+                    error.response.data.message)
                   setIsLoading(false);
                 })
             }
@@ -124,20 +103,25 @@ export default function HabitsPage() {
           </CheckboxContainer>
 
           <ButtonContainer>
-            <CancelButton
-              onClick={() => setShowForm(false)}
-            >Cancelar</CancelButton>
+            <CancelButton onClick={() => setShowForm(false)}>
+              Cancelar
+            </CancelButton>
+
             <SubmitButton
               type='submit'
-              isLoading={isLoading}>{isLoading ? <Loading /> : 'Salvar'}</SubmitButton>
-
+              isLoading={isLoading}>
+              {isLoading ? <Loading /> : 'Salvar'}
+            </SubmitButton>
           </ButtonContainer>
+
         </StyledForm>}
       {habits.length === 0 ? <NoHabitsSpan>{noHabitsSpanString}</NoHabitsSpan> :
         <Habits>
           {habits.map((habit) =>
             <Habit key={habit.id}>
-              <span>{habit.name}</span>
+              <span>
+                {habit.name}
+              </span>
               <CheckboxContainer>
                 {weekdaysDefault.map((weekday) =>
                   <Checkbox
@@ -150,13 +134,8 @@ export default function HabitsPage() {
                       name="trash-outline"
                       onClick={() => {
                         if (window.confirm("Deseja deletar este hábito?")) {
-                          axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habit.id}`,
-                            {
-                              headers: {
-                                'Authorization': `Bearer ${user.token}`
-                              }
-                            })
-                            .then(() => getHabits())
+                          axiosDelete(`habits/${habit.id}`, requestConfig)
+                            .then(() => getHabits('habits', user.token, setHabits))
                         }
                       }}></ion-icon>
 
@@ -167,7 +146,7 @@ export default function HabitsPage() {
           )}
         </Habits>}
       <ToastContainer />
-    </Container>
+    </Container >
   )
 
 }
