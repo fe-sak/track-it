@@ -139,11 +139,10 @@ const Habit = styled.div`
     color: #666666;
   }
 
-  ion-icon{
+  img{
     position: absolute;
     top: 11px;
     right: 11px;
-    font-size: 15px;
     color: #666666;
   }
 `

@@ -6,6 +6,7 @@ import { Button, ButtonContainer, CancelButton, Checkbox, CheckboxContainer, Con
 import { toastError } from "../../page components/toasts";
 import { weekdaysDefault } from "./weekdays";
 import { axiosDelete, axiosPost, useAxiosGet } from "../../services/services";
+import trash from '../../../assets/trash.svg'
 
 export default function HabitsPage() {
   const deepCopyWeekdaysDefault = JSON.parse(JSON.stringify(weekdaysDefault));
@@ -135,15 +136,12 @@ export default function HabitsPage() {
                     isSelected={habit.days.includes(weekday.index)}>
 
                     <span>{weekday.day}</span>
-
-                    <ion-icon
-                      name="trash-outline"
-                      onClick={() => {
-                        if (window.confirm("Deseja deletar este hábito?")) {
-                          axiosDelete(`habits/${habit.id}`, requestConfig)
-                            .then(() => getHabits('habits', user.token, setHabits))
-                        }
-                      }}></ion-icon>
+                    <img src={trash} alt="delete button" onClick={() => {
+                      if (window.confirm("Deseja deletar este hábito?")) {
+                        axiosDelete(`habits/${habit.id}`, requestConfig)
+                          .then(() => getHabits('habits', user.token, setHabits))
+                      }
+                    }} />
 
                   </Checkbox>
                 )}
