@@ -5,6 +5,7 @@ const Container = styled.div`
   height: 100vh;
   padding: 98px 17px 100px 17px;
   background-color: #F2F2F2;
+  overflow: scroll;
 
   span{
     display: block;
