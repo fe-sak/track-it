@@ -3,12 +3,12 @@ import { Container, TitleSpan, Habit, HabitsContainer, ProgressSpan } from "./st
 import Context from "../../contexts/Context"
 import countProgress from "./countProgress";
 import { axiosPost, useAxiosGet } from "../../services/services";
+import { weekdays } from "../../page components/weekdays";
 
 export default function TodayPage() {
   const { user, setUser, todaysHabits, setTodaysHabits } = useContext(Context);
   const getTodaysHabits = useAxiosGet();
 
-  const weekdays = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
   const currentDate = new Date();
 
   useEffect(() => {

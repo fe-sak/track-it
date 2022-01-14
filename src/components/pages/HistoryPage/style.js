@@ -21,6 +21,10 @@ const Container = styled.div`
 const TitleSpan = styled.span`
   font-size: 23px;
   color: #126BA5;
+
+  &:last-of-type{
+    margin-top: 10px;
+  }
 `
 
 const CalendarContainer = styled.div`
@@ -54,5 +58,23 @@ const CalendarContainer = styled.div`
     }
   }
 `
+const Habits = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+`
 
-export { Container, TitleSpan, CalendarContainer }
+const Habit = styled.div`
+  position: relative;
+  width: 100%;
+  padding: 18px;
+  background-color: white;
+
+  span{
+    font-size: 20px;
+    color: ${props => props.isDone ? '#8CC654' : '#EA5766'};
+  }
+`
+export { Container, TitleSpan, CalendarContainer, Habit, Habits }

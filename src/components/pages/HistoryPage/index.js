@@ -5,15 +5,16 @@ import 'react-calendar/dist/Calendar.css';
 
 import Context from "../../contexts/Context";
 import { useAxiosGet } from "../../services/services";
-import { Checkbox, CheckboxContainer } from "../HabitsPage/style";
-import { Container, TitleSpan, CalendarContainer } from "./style";
+import { HabitsContainer } from "../TodayPage/style";
+import historyParser from "./historyParser";
+import { Container, TitleSpan, CalendarContainer, Habits, Habit } from "./style";
 
 export default function HistoryPage() {
   const { user, setUser } = useContext(Context);
   const [calendar, setCalendar] = useState(new Date())
   const [history, setHistory] = useState([]);
-
-
+  const [clickedDay, setClickedDay] = useState([]);
+  const currentDate = new Date();
 
   const axiosGet = useAxiosGet();
   useEffect(() => {
@@ -28,18 +29,17 @@ export default function HistoryPage() {
     }
   }, [axiosGet, user, setHistory])
 
-  const [userDatesComplete, userDatesIncomplete] = history.map((object) => object.habits.map((habit) => habit.done ? object.day : object.day))
+  const [completeDays, incompleteDays] = historyParser(history);
 
   function tileClassName({ date }) {
     date = dayjs(date).format('DD/MM/YYYY');
-    if (userDatesComplete.includes(date)) {
+    if (completeDays.map(e => e.day).includes(date)) {
       return 'complete';
     }
-    else if (userDatesIncomplete.includes(date)) return 'incomplete';
+    else if (incompleteDays.map(e => e.day).includes(date)) return 'incomplete';
     else return ''
   }
-
-  let showHabits = [];
+  console.log(clickedDay)
   if (history.length === 0) return '';
   else {
     return (
@@ -53,18 +53,24 @@ export default function HistoryPage() {
             value={calendar}
             onChange={setCalendar}
             tileClassName={tileClassName}
-          // onClickDay={(date) => {
-          //   date = dayjs(date).format('DD/MM/YYYY');
-          //   if (userDatesComplete.includes(date) || userDatesIncomplete.includes(date)) {
-          //     showHabits = history.filter(object => object.day === date)
-          //   }
-          // }}
+            onClickDay={(date) => {
+              date = dayjs(date).format('DD/MM/YYYY');
+              if (completeDays.map(e => e.day).includes(date) || incompleteDays.map(e => e.day).includes(date)) {
+                setClickedDay(history.filter((e) => e.day === date))
+              }
+              else setClickedDay([]);
+            }}
           />
-          <CheckboxContainer>
-            <Checkbox>
-              {showHabits}
-            </Checkbox>
-          </CheckboxContainer>
+          <TitleSpan>
+            {clickedDay.length !== 0 && `Hábitos do dia ${clickedDay[0].day}`}
+          </TitleSpan>
+          { }
+          {clickedDay.length !== 0 && <Habits>
+            {clickedDay[0].habits.map((habit) =>
+              <Habit key={habit.id} isDone={habit.done}>
+                <span>{habit.name}</span>
+              </Habit>)}
+          </Habits>}
         </CalendarContainer>
       </Container>
     )
