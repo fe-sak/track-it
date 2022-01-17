@@ -6,6 +6,10 @@
 
 This is Track it! A mobile web-page application to manage your daily habits and be more productive!
 
+### Why?
+
+To create a bigger react project, using a variety of libs. Also, I hope it can be useful for someone! 
+
 ## Functionalities
 
 - Login
