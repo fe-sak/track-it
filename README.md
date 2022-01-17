@@ -2,6 +2,8 @@
 
 <img src="https://media.giphy.com/media/62Yp8060L4xsbGPkYA/giphy.gif" alt='example of usage' />
 
+You can use it right now [here!](projeto-10-track-it-six.vercel.app)
+
 ## About this project
 
 This is Track it! A mobile web-page application to manage your daily habits and be more productive!
