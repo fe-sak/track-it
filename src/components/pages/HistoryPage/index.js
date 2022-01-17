@@ -5,7 +5,6 @@ import 'react-calendar/dist/Calendar.css';
 
 import Context from "../../contexts/Context";
 import { useAxiosGet } from "../../services/services";
-import { HabitsContainer } from "../TodayPage/style";
 import historyParser from "./historyParser";
 import { Container, TitleSpan, CalendarContainer, Habits, Habit } from "./style";
 
@@ -14,7 +13,6 @@ export default function HistoryPage() {
   const [calendar, setCalendar] = useState(new Date())
   const [history, setHistory] = useState([]);
   const [clickedDay, setClickedDay] = useState([]);
-  const currentDate = new Date();
 
   const axiosGet = useAxiosGet();
   useEffect(() => {

@@ -38,7 +38,8 @@ export default function SignInPage() {
           placeholder="email"
           name='email'
           value={formValues.email}
-          onChange={handleInputChange} />
+          onChange={handleInputChange}
+        />
         <Input
           type="password"
           placeholder="senha"
