@@ -26,5 +26,5 @@ export function toastSuccess(message) {
 
 
 
-const exportedObject = { toastError };
+const exportedObject = { toastError, toastSuccess };
 export default exportedObject;
