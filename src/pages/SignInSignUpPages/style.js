@@ -1,18 +1,18 @@
-import { Link } from "react-router-dom"
-import styled from "styled-components"
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 const Form = styled.form`
   display:flex;
   flex-direction: column;
   width: 303px;
   gap: 6px;
-`
+`;
 
 const Input = styled.input`
   height: 45px;
@@ -24,7 +24,7 @@ const Input = styled.input`
     color: #DBDBDB;
   }
 
-`
+`;
 
 const Button = styled.button`
   background-color: #52B6FF;
@@ -36,12 +36,13 @@ const Button = styled.button`
   opacity: ${props => props.isLoading ? 0.7 : 1};
   cursor: ${props => props.isLoading ? 'default' : 'pointer'};
   pointer-events: ${props => props.isLoading ? 'none' : 'auto'};
-`
+`;
+
 const StyledLink = styled(Link)`
   color: #52B6FF;
   margin-top: 25px;
 
-`
+`;
 
 export {
   Container,
@@ -49,4 +50,4 @@ export {
   Input,
   Button,
   StyledLink
-}
+};

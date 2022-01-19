@@ -1,8 +1,8 @@
-import axios from "axios";
-import { useCallback } from "react";
-import { toastError, toastSuccess } from "../page components/toasts";
+import axios from 'axios';
+import { useCallback } from 'react';
+import { toastError, toastSuccess } from '../components/toasts';
 
-const BASE_URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/'
+const BASE_URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/';
 
 export function handleSignInSubmit(e, url, toSend, setIsLoading) {
   return new Promise((resolve, reject) => {
@@ -12,14 +12,14 @@ export function handleSignInSubmit(e, url, toSend, setIsLoading) {
     axios.post(`${BASE_URL}${url}`, toSend)
       .then((response) => {
         setIsLoading(false);
-        resolve(response.data)
+        resolve(response.data);
       })
       .catch((error) => {
-        toastError(error.response.statusText === 'Unprocessable Entity' ? 'Email inválido' : error.response.data.message)
+        toastError(error.response.statusText === 'Unprocessable Entity' ? 'Email inválido' : error.response.data.message);
         setIsLoading(false);
         reject();
-      })
-  })
+      });
+  });
 }
 
 export function handleSignUpSubmit(e, url, toSend, setIsLoading) {
@@ -34,12 +34,11 @@ export function handleSignUpSubmit(e, url, toSend, setIsLoading) {
         resolve();
       })
       .catch((error) => {
-        console.log(error.response)
         setIsLoading(false);
-        toastError(error.response.data.message === 'Campo "body" inválido!' ? 'Email inválido' : error.response.data.message)
+        toastError(error.response.data.message === 'Campo \'body\' inválido!' ? 'Email inválido' : error.response.data.message);
         reject();
-      })
-  })
+      });
+  });
 }
 
 export function useAxiosGet() {
@@ -51,24 +50,24 @@ export function useAxiosGet() {
     })
       .then((response) => {
         setState(response.data);
-      })
-  }, [])
+      });
+  }, []);
 
-  return axiosGet
+  return axiosGet;
 }
 
 export function axiosPost(url, body, config) {
   return new Promise((resolve, reject) => {
     axios.post(`${BASE_URL}${url}`, body, config)
       .then(() => resolve())
-      .catch(() => reject())
-  })
+      .catch(() => reject());
+  });
 }
 
 export function axiosDelete(url, config) {
   return new Promise((resolve, reject) => {
     axios.delete(`${BASE_URL}${url}`, config)
       .then(() => resolve())
-      .catch(() => reject())
-  })
+      .catch(() => reject());
+  });
 }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100vw;
@@ -17,7 +17,7 @@ const Container = styled.div`
     border-radius: 10px;
     border: none;
   }
-`
+`;
 
 const TitleSpan = styled.span`
   font-size: 23px;
@@ -26,7 +26,7 @@ const TitleSpan = styled.span`
   &:last-of-type{
     margin-top: 10px;
   }
-`
+`;
 
 const CalendarContainer = styled.div`
   .react-calendar{
@@ -58,14 +58,15 @@ const CalendarContainer = styled.div`
       color: black;
     }
   }
-`
+`;
+
 const Habits = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
   width: 100%;
   margin-top: 20px;
-`
+`;
 
 const Habit = styled.div`
   position: relative;
@@ -77,5 +78,12 @@ const Habit = styled.div`
     font-size: 20px;
     color: ${props => props.isDone ? '#8CC654' : '#EA5766'};
   }
-`
-export { Container, TitleSpan, CalendarContainer, Habit, Habits }
+`;
+
+export {
+  Container,
+  TitleSpan,
+  CalendarContainer,
+  Habit,
+  Habits
+};

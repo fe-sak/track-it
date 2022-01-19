@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { useLocation } from "react-router-dom";
-import styled from "styled-components";
-import Context from "../contexts/Context";
-import textLogo from "../../assets/TrackIt.svg"
+import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import Context from '../contexts/Context';
+import textLogo from '../assets/TrackIt.svg';
 
 export default function Header() {
   const { user } = useContext(Context);
@@ -16,7 +16,7 @@ export default function Header() {
           <img src={user.image} alt='user profile' />
         </PageHeader>}
     </>
-  )
+  );
 }
 
 const PageHeader = styled.div`
@@ -44,4 +44,4 @@ const PageHeader = styled.div`
     border-radius: 100%;
     margin-right: 18px;
   }
-`
+`;

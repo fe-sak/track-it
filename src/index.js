@@ -1,6 +1,7 @@
-import { render } from 'react-dom'
-import './styles/reset.css'
-import './styles/style.css'
-import App from './components/App'
+import React from 'react';
+import { render } from 'react-dom';
+import './styles/reset.css';
+import './styles/global.css';
+import App from './App';
 
-render(<App />, document.querySelector(".root"));
+render(<App />, document.querySelector('.root'));

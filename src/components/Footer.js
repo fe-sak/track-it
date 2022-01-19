@@ -1,11 +1,11 @@
-import { useContext, useEffect } from "react";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import React, { useContext, useEffect } from 'react';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { Link, useLocation } from "react-router-dom"
-import styled from "styled-components";
-import Context from "../contexts/Context";
-import countProgress from "../pages/TodayPage/countProgress";
-import { useAxiosGet } from "../services/services";
+import { Link, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
+import Context from '../contexts/Context';
+import countProgress from '../pages/TodayPage/countProgress';
+import { useAxiosGet } from '../services/services';
 
 export default function Footer() {
   const location = useLocation();
@@ -16,9 +16,9 @@ export default function Footer() {
     if (user !== '') {
       getTodaysHabits('habits/today', user.token, setTodaysHabits);
     }
-  }, [getTodaysHabits, user, user.token, setTodaysHabits])
+  }, [getTodaysHabits, user, user.token, setTodaysHabits]);
 
-  const [done, total] = countProgress(todaysHabits)
+  const [done, total] = countProgress(todaysHabits);
   return (
     <>
       {location.pathname === '/' || location.pathname === '/cadastro' ? '' :
@@ -40,7 +40,7 @@ export default function Footer() {
           <StyledLink to='/historico'>Histórico</StyledLink>
         </PageFooter>}
     </>
-  )
+  );
 }
 
 const PageFooter = styled.div`
@@ -63,13 +63,13 @@ const PageFooter = styled.div`
     margin-right: 36px;
   }
 
-`
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: #52B6FF;
   font-size: 18px;
-`
+`;
 
 const ProgressbarLink = styled(Link)`
   width: 91px;
@@ -79,5 +79,5 @@ const ProgressbarLink = styled(Link)`
   margin-left: 50%;
   transform: translateX(-50%);
   bottom: 10px;
-`
+`;
 

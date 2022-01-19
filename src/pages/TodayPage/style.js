@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 
 const Container = styled.div`
@@ -11,18 +11,18 @@ const Container = styled.div`
   span{
     display: block;
   }
-`
+`;
 
 const TitleSpan = styled.span`
   font-size: 23px;
   color: #126BA5;
-`
+`;
 
 const ProgressSpan = styled.span`
   font-size: 18px;
   color: ${props => props.isDone ? '#8FC549' : '#BABABA'};
   margin-top: 10px;
-`
+`;
 
 const HabitsContainer = styled.div`
   width: 100%;
@@ -30,7 +30,8 @@ const HabitsContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-top: 26px;
-`
+`;
+
 const Habit = styled.div`
   background-color: white;
   width: 100%;
@@ -77,6 +78,6 @@ const Habit = styled.div`
       font-size: 60px;
     }
   }
-`
+`;
 
-export { Container, TitleSpan, ProgressSpan, HabitsContainer, Habit }
+export { Container, TitleSpan, ProgressSpan, HabitsContainer, Habit };

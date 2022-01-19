@@ -6,6 +6,6 @@ const weekdaysDefault = [
   { day: 'Q', isSelected: false, index: 4 },
   { day: 'S', isSelected: false, index: 5 },
   { day: 'S', isSelected: false, index: 6 },
-]
+];
 
-export { weekdaysDefault }
+export { weekdaysDefault };

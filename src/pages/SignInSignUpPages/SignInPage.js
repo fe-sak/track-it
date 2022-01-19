@@ -1,11 +1,11 @@
-import { useContext, useState } from "react"
-import { Container, Form, Input, Button, StyledLink } from './style'
-import Loading from "../../page components/Loader";
-import Logo from "../../page components/Logo";
-import Context from "../../contexts/Context";
-import { handleSignInSubmit } from "../../services/services";
-import { ToastContainer } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useState } from 'react';
+import { Container, Form, Input, Button, StyledLink } from './style';
+import Loading from '../../components/Loader';
+import Logo from '../../components/Logo';
+import Context from '../../contexts/Context';
+import { handleSignInSubmit } from '../../services/services';
+import { ToastContainer } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignInPage() {
   const navigate = useNavigate();
@@ -16,12 +16,12 @@ export default function SignInPage() {
   const { isLoading, setIsLoading, setUser } = useContext(Context);
 
   if (localStorage.getItem('user') !== null) {
-    setUser(JSON.parse(localStorage.getItem('user')))
+    setUser(JSON.parse(localStorage.getItem('user')));
     navigate('/hoje');
   }
 
   function handleInputChange(e) {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value })
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
   }
 
   return (
@@ -34,22 +34,22 @@ export default function SignInPage() {
           navigate('/hoje');
         })}>
         <Input
-          type="email"
-          placeholder="email"
+          type='email'
+          placeholder='email'
           name='email'
           value={formValues.email}
           onChange={handleInputChange}
         />
         <Input
-          type="password"
-          placeholder="senha"
+          type='password'
+          placeholder='senha'
           name='password'
           value={formValues.password}
           onChange={handleInputChange} />
-        <Button isLoading={isLoading} type="submit">{isLoading ? <Loading /> : 'Entrar'}</Button>
+        <Button isLoading={isLoading} type='submit'>{isLoading ? <Loading /> : 'Entrar'}</Button>
       </Form>
-      <StyledLink to="/cadastro">Não tem uma conta? Cadastre-se!</StyledLink>
+      <StyledLink to='/cadastro'>Não tem uma conta? Cadastre-se!</StyledLink>
       <ToastContainer />
     </Container>
-  )
+  );
 }

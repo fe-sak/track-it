@@ -10,7 +10,7 @@ export default function historyParser(history) {
     }
   }
   completeDays = history.filter((element) => !incompleteDays.map((e) => e.day).includes(element.day)
-  )
+  );
 
-  return [completeDays, incompleteDays]
+  return [completeDays, incompleteDays];
 }

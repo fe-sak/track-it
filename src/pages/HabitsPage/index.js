@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-import { ToastContainer } from "react-toastify";
-import Context from '../../contexts/Context'
-import Loading from "../../page components/Loader";
-import { Button, ButtonContainer, CancelButton, Checkbox, CheckboxContainer, Container, Habit, Habits, NoHabitsSpan, StyledForm, SubmitButton, TitleContainer, TitleSpan } from "./style";
-import { toastError } from "../../page components/toasts";
-import { weekdaysDefault } from "./weekdays";
-import { axiosDelete, axiosPost, useAxiosGet } from "../../services/services";
-import trash from '../../../assets/trash.svg'
+import React, { useContext, useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import Context from '../../contexts/Context';
+import Loading from '../../components/Loader';
+import { Button, ButtonContainer, CancelButton, Checkbox, CheckboxContainer, Container, Habit, Habits, NoHabitsSpan, StyledForm, SubmitButton, TitleContainer, TitleSpan } from './style';
+import { toastError } from '../../components/toasts';
+import { weekdaysDefault } from './weekdays';
+import { axiosDelete, axiosPost, useAxiosGet } from '../../services/services';
+import trash from '../../assets/trash.svg';
 
 export default function HabitsPage() {
   const deepCopyWeekdaysDefault = JSON.parse(JSON.stringify(weekdaysDefault));
@@ -15,7 +15,7 @@ export default function HabitsPage() {
   const [input, setInput] = useState('');
   const [habits, setHabits] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [weekdays, setWeekdays] = useState(deepCopyWeekdaysDefault)
+  const [weekdays, setWeekdays] = useState(deepCopyWeekdaysDefault);
 
   const getHabits = useAxiosGet();
 
@@ -23,21 +23,21 @@ export default function HabitsPage() {
 
   useEffect(() => {
     if (localStorage.getItem('user') !== null) {
-      setUser(JSON.parse(localStorage.getItem('user')))
+      setUser(JSON.parse(localStorage.getItem('user')));
     }
-  }, [setUser])
+  }, [setUser]);
 
   const requestConfig = {
     headers: {
       'Authorization': `Bearer ${user.token}`
     }
-  }
+  };
 
   useEffect(() => {
     if (user !== '') {
       getHabits('habits', user.token, setHabits);
     }
-  }, [user, user.token, getHabits])
+  }, [user, user.token, getHabits]);
 
   return (
     <Container>
@@ -48,7 +48,7 @@ export default function HabitsPage() {
           if (showForm === false) setShowForm(true);
           else setShowForm(false);
         }}>
-          <ion-icon name="add-outline"></ion-icon>
+          <ion-icon name='add-outline'></ion-icon>
         </Button>
 
       </TitleContainer>
@@ -61,7 +61,7 @@ export default function HabitsPage() {
             const requestBody = {
               name: input,
               days
-            }
+            };
 
             if (days.length === 0) {
               toastError('Escolha pelo menos um dia da semana!');
@@ -79,16 +79,16 @@ export default function HabitsPage() {
                   }, 500);
                 })
                 .catch((error) => {
-                  toastError(error.response.data.message === 'Campo "body" inválido!' ?
+                  toastError(error.response.data.message === 'Campo \'body\' inválido!' ?
                     'Nome do hábito não pode ser vazio!' :
-                    error.response.data.message)
+                    error.response.data.message);
                   setIsLoading(false);
-                })
+                });
             }
           }}>
 
-          <input type="text"
-            placeholder="nome do hábito"
+          <input type='text'
+            placeholder='nome do hábito'
             value={input}
             disabled={isLoading}
             onChange={(e) => setInput(e.target.value)} />
@@ -136,10 +136,10 @@ export default function HabitsPage() {
                     isSelected={habit.days.includes(weekday.index)}>
 
                     <span>{weekday.day}</span>
-                    <img src={trash} alt="delete button" onClick={() => {
-                      if (window.confirm("Deseja deletar este hábito?")) {
+                    <img src={trash} alt='delete button' onClick={() => {
+                      if (window.confirm('Deseja deletar este hábito?')) {
                         axiosDelete(`habits/${habit.id}`, requestConfig)
-                          .then(() => getHabits('habits', user.token, setHabits))
+                          .then(() => getHabits('habits', user.token, setHabits));
                       }
                     }} />
 
@@ -151,6 +151,6 @@ export default function HabitsPage() {
         </Habits>}
       <ToastContainer />
     </Container >
-  )
+  );
 
 }

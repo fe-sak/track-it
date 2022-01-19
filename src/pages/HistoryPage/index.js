@@ -1,31 +1,31 @@
-import dayjs from "dayjs";
-import { useContext, useEffect, useState } from "react";
-import Calendar from "react-calendar";
+import dayjs from 'dayjs';
+import React, { useContext, useEffect, useState } from 'react';
+import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-import Context from "../../contexts/Context";
-import { useAxiosGet } from "../../services/services";
-import historyParser from "./historyParser";
-import { Container, TitleSpan, CalendarContainer, Habits, Habit } from "./style";
+import Context from '../../contexts/Context';
+import { useAxiosGet } from '../../services/services';
+import historyParser from './historyParser';
+import { Container, TitleSpan, CalendarContainer, Habits, Habit } from './style';
 
 export default function HistoryPage() {
   const { user, setUser } = useContext(Context);
-  const [calendar, setCalendar] = useState(new Date())
+  const [calendar, setCalendar] = useState(new Date());
   const [history, setHistory] = useState([]);
   const [clickedDay, setClickedDay] = useState([]);
 
   const axiosGet = useAxiosGet();
   useEffect(() => {
     if (localStorage.getItem('user') !== null) {
-      setUser(JSON.parse(localStorage.getItem('user')))
+      setUser(JSON.parse(localStorage.getItem('user')));
     }
-  }, [setUser])
+  }, [setUser]);
 
   useEffect(() => {
     if (user !== '') {
-      axiosGet(`habits/history/daily`, user.token, setHistory);
+      axiosGet('habits/history/daily', user.token, setHistory);
     }
-  }, [axiosGet, user, setHistory])
+  }, [axiosGet, user, setHistory]);
 
   const [completeDays, incompleteDays] = historyParser(history);
 
@@ -35,9 +35,9 @@ export default function HistoryPage() {
       return 'complete';
     }
     else if (incompleteDays.map(e => e.day).includes(date)) return 'incomplete';
-    else return ''
+    else return '';
   }
-  console.log(clickedDay)
+
   if (history.length === 0) return '';
   else {
     return (
@@ -45,16 +45,16 @@ export default function HistoryPage() {
         <TitleSpan>Histórico</TitleSpan>
         <CalendarContainer>
           <Calendar
-            calendarType="US"
-            locale="pt-br"
-            formatDay={(locale, date) => dayjs(date).format("DD")}
+            calendarType='US'
+            locale='pt-br'
+            formatDay={(locale, date) => dayjs(date).format('DD')}
             value={calendar}
             onChange={setCalendar}
             tileClassName={tileClassName}
             onClickDay={(date) => {
               date = dayjs(date).format('DD/MM/YYYY');
               if (completeDays.map(e => e.day).includes(date) || incompleteDays.map(e => e.day).includes(date)) {
-                setClickedDay(history.filter((e) => e.day === date))
+                setClickedDay(history.filter((e) => e.day === date));
               }
               else setClickedDay([]);
             }}
@@ -71,7 +71,7 @@ export default function HistoryPage() {
           </Habits>}
         </CalendarContainer>
       </Container>
-    )
+    );
   }
 }
 

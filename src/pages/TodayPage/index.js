@@ -1,9 +1,9 @@
-import { useContext, useEffect } from "react";
-import { Container, TitleSpan, Habit, HabitsContainer, ProgressSpan } from "./style";
-import Context from "../../contexts/Context"
-import countProgress from "./countProgress";
-import { axiosPost, useAxiosGet } from "../../services/services";
-import { weekdays } from "../../page components/weekdays";
+import React, { useContext, useEffect } from 'react';
+import { Container, TitleSpan, Habit, HabitsContainer, ProgressSpan } from './style';
+import Context from '../../contexts/Context';
+import countProgress from './countProgress';
+import { axiosPost, useAxiosGet } from '../../services/services';
+import { weekdays } from '../../components/weekdays';
 
 export default function TodayPage() {
   const { user, setUser, todaysHabits, setTodaysHabits } = useContext(Context);
@@ -13,21 +13,21 @@ export default function TodayPage() {
 
   useEffect(() => {
     if (localStorage.getItem('user') !== null) {
-      setUser(JSON.parse(localStorage.getItem('user')))
+      setUser(JSON.parse(localStorage.getItem('user')));
     }
-  }, [setUser])
+  }, [setUser]);
 
   const requestConfig = {
     headers: {
       'Authorization': `Bearer ${user.token}`
     }
-  }
+  };
 
   useEffect(() => {
     if (user !== '') {
       getTodaysHabits('habits/today', user.token, setTodaysHabits);
     }
-  }, [getTodaysHabits, user, user.token, setTodaysHabits])
+  }, [getTodaysHabits, user, user.token, setTodaysHabits]);
 
   if (todaysHabits === undefined) return '';
   else {
@@ -60,19 +60,19 @@ export default function TodayPage() {
               <div onClick={() => {
                 if (habit.done) {
                   axiosPost(`habits/${habit.id}/uncheck`, {}, requestConfig)
-                    .then(() => getTodaysHabits('habits/today', user.token, setTodaysHabits))
+                    .then(() => getTodaysHabits('habits/today', user.token, setTodaysHabits));
                 }
                 else {
                   axiosPost(`habits/${habit.id}/check`, {}, requestConfig)
-                    .then(() => getTodaysHabits('habits/today', user.token, setTodaysHabits))
+                    .then(() => getTodaysHabits('habits/today', user.token, setTodaysHabits));
                 }
               }}>
-                <ion-icon name="checkmark-sharp"></ion-icon>
+                <ion-icon name='checkmark-sharp'></ion-icon>
               </div>
             </Habit>
           )}
         </HabitsContainer>
       </Container>
-    )
+    );
   }
 }

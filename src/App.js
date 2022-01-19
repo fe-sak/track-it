@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Context from './contexts/Context';
-import Footer from './page components/Footer';
-import Header from './page components/Header';
+import Footer from './components/Footer';
+import Header from './components/Header';
 import HabitsPage from './pages/HabitsPage';
 import HistoryPage from './pages/HistoryPage';
 import SignInPage from './pages/SignInSignUpPages/SignInPage';
@@ -28,6 +28,6 @@ export default function App() {
         <Footer />
       </BrowserRouter>
     </Context.Provider>
-  )
+  );
 }
 

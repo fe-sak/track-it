@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 const Container = styled.div`
   width: 100vw;
@@ -6,25 +6,25 @@ const Container = styled.div`
   padding: 98px 17px 100px 17px;
   background-color: #F2F2F2;
   overflow: scroll;
-`
+`;
 const TitleSpan = styled.span`
   font-size: 23px;
   color: #126BA5;
-`
+`;
 
 const NoHabitsSpan = styled.span`
   font-size: 18px;
   color: #666666;
   margin-top: 28px;
   display: inline-block;
-`
+`;
 
 const TitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-`
+`;
 
 const Button = styled.div`
   width: 40px;
@@ -40,7 +40,7 @@ const Button = styled.div`
     color: white;
     font-size: 30px;
   }
-`
+`;
 
 const StyledForm = styled.form`
   width: 100%;
@@ -69,7 +69,7 @@ const StyledForm = styled.form`
 
     
   }
-`
+`;
 
 const CheckboxContainer = styled.div`
   width: 100%;
@@ -77,7 +77,7 @@ const CheckboxContainer = styled.div`
   gap: 4px;
   margin-top: 10px;
 
-`
+`;
 
 const Checkbox = styled.div`
   width: 30px;
@@ -92,21 +92,21 @@ const Checkbox = styled.div`
   background-color: ${props => props.isSelected ? '#CFCFCF' : 'white'};
   cursor: pointer;
   pointer-events: ${props => props.isLoading ? 'none' : 'default'};
-`
+`;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 23px;
   width: 100%;
-`
+`;
 
 const CancelButton = styled.button`
   all: initial;
   font: 400 16px 'lexend deca';
   color: #52B6FF;
   cursor: pointer;
-`
+`;
 
 const SubmitButton = styled.button`
   all: initial;
@@ -118,7 +118,7 @@ const SubmitButton = styled.button`
   opacity: ${props => props.isLoading ? 0.7 : 1};
   cursor: ${props => props.isLoading ? 'default' : 'pointer'};
   pointer-events: ${props => props.isLoading ? 'none' : 'auto'};
-`
+`;
 
 const Habits = styled.div`
   display: flex;
@@ -126,7 +126,7 @@ const Habits = styled.div`
   gap: 10px;
   width: 100%;
   margin-top: 20px;
-`
+`;
 
 const Habit = styled.div`
   position: relative;
@@ -145,7 +145,7 @@ const Habit = styled.div`
     right: 11px;
     color: #666666;
   }
-`
+`;
 
 export {
   Container,
@@ -161,4 +161,4 @@ export {
   SubmitButton,
   Habits,
   Habit
-}
+};
