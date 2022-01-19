@@ -5,20 +5,23 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import Context from '../contexts/Context';
 import countProgress from '../pages/TodayPage/countProgress';
-import { useAxiosGet } from '../services/services';
+import { getTodaysHabits } from '../services/services';
 
 export default function Footer() {
   const location = useLocation();
   const { user, todaysHabits, setTodaysHabits } = useContext(Context);
-  const getTodaysHabits = useAxiosGet();
 
   useEffect(() => {
     if (user !== '') {
-      getTodaysHabits('habits/today', user.token, setTodaysHabits);
+      getTodaysHabits(user.token)
+        .then((response)=>{
+          setTodaysHabits(response.data);
+        });
     }
-  }, [getTodaysHabits, user, user.token, setTodaysHabits]);
+  }, [user, user.token, setTodaysHabits]);
 
   const [done, total] = countProgress(todaysHabits);
+  
   return (
     <>
       {location.pathname === '/' || location.pathname === '/cadastro' ? '' :

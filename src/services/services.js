@@ -4,6 +4,16 @@ import { toastError, toastSuccess } from '../components/toasts';
 
 const BASE_URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/';
 
+function createConfig(token) {
+  return { headers: {Authorization: `Bearer ${token}` } };
+}
+
+export function getTodaysHabits(token) {
+  const config = createConfig(token);
+
+  return axios.get(`${BASE_URL}habits/today`, config);
+}
+
 export function handleSignInSubmit(e, url, toSend, setIsLoading) {
   return new Promise((resolve, reject) => {
 

@@ -3,7 +3,7 @@ import { Container, TitleSpan, Habit, HabitsContainer, ProgressSpan } from './st
 import Context from '../../contexts/Context';
 import countProgress from './countProgress';
 import { axiosPost, useAxiosGet } from '../../services/services';
-import { weekdays } from '../../components/weekdays';
+import { weekdays } from '../../utils/weekdays';
 
 export default function TodayPage() {
   const { user, setUser, todaysHabits, setTodaysHabits } = useContext(Context);
