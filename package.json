@@ -2,6 +2,7 @@
   "name": "projeto_10_trackit",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "axios": "^0.24.0",
     "dayjs": "^1.10.7",

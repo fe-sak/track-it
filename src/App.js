@@ -15,7 +15,16 @@ export default function App() {
   const [todaysHabits, setTodaysHabits] = useState([]);
 
   return (
-    <Context.Provider value={{ user, setUser, isLoading, setIsLoading, todaysHabits, setTodaysHabits }}>
+    <Context.Provider
+      value={{
+        user,
+        setUser,
+        isLoading,
+        setIsLoading,
+        todaysHabits,
+        setTodaysHabits,
+      }}
+    >
       <BrowserRouter>
         <Header />
         <Routes>
@@ -30,4 +39,3 @@ export default function App() {
     </Context.Provider>
   );
 }
-

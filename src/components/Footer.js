@@ -13,23 +13,24 @@ export default function Footer() {
 
   useEffect(() => {
     if (user !== '') {
-      getTodaysHabits(user.token)
-        .then((response)=>{
-          setTodaysHabits(response.data);
-        });
+      getTodaysHabits(user.token).then((response) => {
+        setTodaysHabits(response.data);
+      });
     }
   }, [user, user.token, setTodaysHabits]);
 
   const [done, total] = countProgress(todaysHabits);
-  
+
   return (
     <>
-      {location.pathname === '/' || location.pathname === '/cadastro' ? '' :
+      {location.pathname === '/' || location.pathname === '/cadastro' ? (
+        ''
+      ) : (
         <PageFooter>
           <StyledLink to='/habitos'>Hábitos</StyledLink>
           <ProgressbarLink to='/hoje'>
             <CircularProgressbar
-              value={Math.round(((done / total) * 100))}
+              value={Math.round((done / total) * 100)}
               text='Hoje'
               background='true'
               backgroundPadding={6}
@@ -38,10 +39,12 @@ export default function Footer() {
                 trailColor: '#52B6FF',
                 pathColor: 'white',
                 textColor: 'white',
-              })} />
+              })}
+            />
           </ProgressbarLink>
           <StyledLink to='/historico'>Histórico</StyledLink>
-        </PageFooter>}
+        </PageFooter>
+      )}
     </>
   );
 }
@@ -53,24 +56,23 @@ const PageFooter = styled.div`
   width: 100vw;
   height: 70px;
   background-color: white;
-  color: #52B6FF;
+  color: #52b6ff;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  a:first-of-type{
+  a:first-of-type {
     margin-left: 36px;
   }
 
-  a:last-of-type{
+  a:last-of-type {
     margin-right: 36px;
   }
-
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #52B6FF;
+  color: #52b6ff;
   font-size: 18px;
 `;
 
@@ -83,4 +85,3 @@ const ProgressbarLink = styled(Link)`
   transform: translateX(-50%);
   bottom: 10px;
 `;
-
