@@ -19,7 +19,7 @@ To create a bigger react project, using a variety of libs. Also, I hope it can b
 - Persistent login
 - Create habits
 - Delete habits
-- Check each habit as done or not
+- Check if each habit was done or not
 - History of your habits
 
 ## Technologies used
