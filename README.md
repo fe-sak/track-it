@@ -24,9 +24,11 @@ To create a bigger react project, using a variety of libs. Also, I hope it can b
 
 ## Technologies used
 
-- react, react-router-dom, react-calendar, react-circular-progressbar, react-loader-spinner, react-toastify
+- ![React](https://img.shields.io/badge/-React-05122A?style=flat&logo=react)&nbsp;
+- ![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)&nbsp;
+- ![styled-components](https://img.shields.io/badge/-styled--components-05122A?style=flat&logo=styled-components)
+- react-router-dom, react-calendar, react-circular-progressbar, react-loader-spinner, react-toastify
 - dayjs
-- styled components
 - axios
 
 ## How to install this app
@@ -52,7 +54,7 @@ $ npm install
 
 ## How to run this app
 
-With all dependencies installed and the environment properly configured, you can now run the app in development mode:
+With all dependencies installed and the environment properly configured, you can now run the app in development mode (run this command inside the project directory):
 
 ```
 $ npm run start
