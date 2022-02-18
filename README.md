@@ -24,9 +24,9 @@ To create a bigger react project, using a variety of libs. Also, I hope it can b
 
 ## Technologies used
 
-- ![React](https://img.shields.io/badge/-React-05122A?style=flat&logo=react)&nbsp;
-- ![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)&nbsp;
-- ![styled-components](https://img.shields.io/badge/-styled--components-05122A?style=flat&logo=styled-components)
+![React](https://img.shields.io/badge/-React-05122A?style=flat&logo=react)&nbsp;
+![JavaScript](https://img.shields.io/badge/-JavaScript-05122A?style=flat&logo=javascript)&nbsp;
+![styled-components](https://img.shields.io/badge/-styled--components-05122A?style=flat&logo=styled-components)
 - react-router-dom, react-calendar, react-circular-progressbar, react-loader-spinner, react-toastify
 - dayjs
 - axios
